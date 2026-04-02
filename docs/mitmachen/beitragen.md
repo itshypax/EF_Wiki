@@ -1,5 +1,7 @@
 ---
 title: Wie kann ich beitragen?
+tags:
+  - Fertig
 ---
 
 # Wie kann ich beitragen?
@@ -22,7 +24,7 @@ Mehr dazu unter [Wiki bearbeiten](wiki-bearbeiten.md).
 
 ## Fehler melden
 
-Nutze die [GitHub Issues](https://github.com/hypax/Wiki/issues), um Fehler zu melden oder Verbesserungen vorzuschlagen.
+Nutze die [GitHub Issues](https://github.com/EmergencyForge/Wiki/issues), um Fehler zu melden oder Verbesserungen vorzuschlagen.
 
 ## Richtlinien
 

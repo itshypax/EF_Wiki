@@ -1,5 +1,7 @@
 ---
 title: Startseite
+tags:
+  - Fertig
 ---
 
 # Willkommen beim EmergencyForge Wiki
@@ -10,7 +12,7 @@ Dieses Wiki ist die zentrale Wissenssammlung rund um **EmergencyForge**. Hier fi
 
 <div class="grid cards" markdown>
 
-- :material-rocket-launch: **Erste Schritte**
+- :material-rocket-launch:{ .lg .middle } **Erste Schritte**
 
     ---
 
@@ -18,7 +20,7 @@ Dieses Wiki ist die zentrale Wissenssammlung rund um **EmergencyForge**. Hier fi
 
     [:octicons-arrow-right-24: Loslegen](getting-started/index.md)
 
-- :material-book-open-variant: **Dokumentation**
+- :material-book-open-variant:{ .lg .middle } **Dokumentation**
 
     ---
 
@@ -26,7 +28,7 @@ Dieses Wiki ist die zentrale Wissenssammlung rund um **EmergencyForge**. Hier fi
 
     [:octicons-arrow-right-24: Zur Dokumentation](dokumentation/index.md)
 
-- :material-school: **Anleitungen**
+- :material-school:{ .lg .middle } **Anleitungen**
 
     ---
 
@@ -34,7 +36,7 @@ Dieses Wiki ist die zentrale Wissenssammlung rund um **EmergencyForge**. Hier fi
 
     [:octicons-arrow-right-24: Zu den Anleitungen](anleitungen/index.md)
 
-- :material-account-group: **Mitmachen**
+- :material-account-group:{ .lg .middle } **Mitmachen**
 
     ---
 
@@ -50,3 +52,12 @@ EmergencyForge ist ein Projekt im Bereich Notfall- und Einsatzmanagement. Dieses
 
 !!! tip "Du kannst mithelfen!"
     Jede Seite hat oben rechts einen :material-pencil: **Bearbeiten-Button**. Damit kannst du direkt Verbesserungen vorschlagen.
+
+## Status-Uebersicht
+
+| Bereich | Status |
+|---------|--------|
+| Erste Schritte | <span class="status status-wip">In Arbeit</span> |
+| Dokumentation | <span class="status status-wip">In Arbeit</span> |
+| Anleitungen | <span class="status status-neu">Neu</span> |
+| Mitmachen | <span class="status status-fertig">Fertig</span> |

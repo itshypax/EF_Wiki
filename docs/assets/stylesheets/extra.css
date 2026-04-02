@@ -1,0 +1,334 @@
+/* ============================================
+   EmergencyForge Custom Theme
+   ============================================ */
+
+:root {
+  /* Brand Colors */
+  --ef-red: #C62828;
+  --ef-red-light: #E53935;
+  --ef-red-dark: #8E0000;
+  --ef-red-glow: rgba(198, 40, 40, 0.3);
+  --ef-red-subtle: rgba(198, 40, 40, 0.08);
+
+  /* MkDocs Material overrides */
+  --md-primary-fg-color: var(--ef-red);
+  --md-primary-fg-color--light: var(--ef-red-light);
+  --md-primary-fg-color--dark: var(--ef-red-dark);
+  --md-accent-fg-color: var(--ef-red-light);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: var(--ef-red);
+  --md-primary-fg-color--light: var(--ef-red-light);
+  --md-primary-fg-color--dark: var(--ef-red-dark);
+  --md-accent-fg-color: var(--ef-red-light);
+}
+
+/* ============================================
+   Navigation Hover Effects
+   ============================================ */
+
+/* Tab hover with slide-up underline */
+.md-tabs__link {
+  position: relative;
+  transition: color 0.25s ease, transform 0.2s ease;
+}
+
+.md-tabs__link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width 0.3s ease, left 0.3s ease;
+  border-radius: 2px;
+}
+
+.md-tabs__link:hover::after,
+.md-tabs__link--active::after {
+  width: 100%;
+  left: 0;
+}
+
+.md-tabs__link:hover {
+  transform: translateY(-1px);
+}
+
+/* Sidebar nav hover effects */
+.md-nav__link {
+  transition: color 0.2s ease, padding-left 0.2s ease, background 0.2s ease;
+  border-radius: 4px;
+}
+
+.md-nav__link:hover {
+  padding-left: 0.8rem;
+  background: var(--ef-red-subtle);
+  color: var(--ef-red) !important;
+}
+
+.md-nav__link--active {
+  border-left: 3px solid var(--ef-red);
+  padding-left: 0.6rem;
+  font-weight: 600;
+}
+
+/* ============================================
+   Animated Cards
+   ============================================ */
+
+/* Card entrance animation */
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grid.cards > ul > li,
+.md-typeset .grid.cards > ul > li {
+  animation: cardSlideUp 0.5s ease forwards;
+  opacity: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.grid.cards > ul > li:nth-child(1) { animation-delay: 0.05s; }
+.grid.cards > ul > li:nth-child(2) { animation-delay: 0.1s; }
+.grid.cards > ul > li:nth-child(3) { animation-delay: 0.15s; }
+.grid.cards > ul > li:nth-child(4) { animation-delay: 0.2s; }
+.grid.cards > ul > li:nth-child(5) { animation-delay: 0.25s; }
+.grid.cards > ul > li:nth-child(6) { animation-delay: 0.3s; }
+
+/* Card hover: lift + glow */
+.grid.cards > ul > li:hover,
+.md-typeset .grid.cards > ul > li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--ef-red-glow);
+  border-color: var(--ef-red-light);
+}
+
+/* Subtle top-border accent on cards */
+.grid.cards > ul > li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ef-red), var(--ef-red-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.grid.cards > ul > li:hover::before {
+  transform: scaleX(1);
+}
+
+/* Card link arrows animate on hover */
+.grid.cards > ul > li:hover a {
+  letter-spacing: 0.01em;
+}
+
+/* ============================================
+   Status Tags (use in frontmatter: tags: [Neu])
+   ============================================ */
+
+/* Base tag styling */
+.md-tag {
+  border-radius: 12px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.2em 0.7em;
+  transition: transform 0.2s ease;
+}
+
+.md-tag:hover {
+  transform: scale(1.05);
+}
+
+/* "Neu" tag — green pulse */
+a[href*="Neu"] > .md-tag,
+.md-tag[data-tag="Neu"] {
+  background-color: #2E7D32;
+  color: white;
+  animation: tagPulse 2s ease infinite;
+}
+
+/* "In Arbeit" tag — amber */
+a[href*="In+Arbeit"] > .md-tag,
+.md-tag[data-tag="In Arbeit"] {
+  background-color: #F57F17;
+  color: white;
+}
+
+/* "Fertig" tag — blue */
+a[href*="Fertig"] > .md-tag,
+.md-tag[data-tag="Fertig"] {
+  background-color: #1565C0;
+  color: white;
+}
+
+@keyframes tagPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); }
+  50% { box-shadow: 0 0 0 4px rgba(46, 125, 50, 0); }
+}
+
+/* Inline status badges for use in content */
+.status {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-left: 0.3em;
+}
+
+.status-neu {
+  background: #2E7D32;
+  color: white;
+}
+
+.status-wip {
+  background: #F57F17;
+  color: white;
+}
+
+.status-fertig {
+  background: #1565C0;
+  color: white;
+}
+
+.status-veraltet {
+  background: #616161;
+  color: white;
+}
+
+/* ============================================
+   Breadcrumbs Enhancement
+   ============================================ */
+
+.md-path {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.md-path__link {
+  transition: color 0.2s ease;
+}
+
+.md-path__link:hover {
+  color: var(--ef-red-light) !important;
+}
+
+/* ============================================
+   Content Enhancements
+   ============================================ */
+
+/* Smooth heading anchors */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  scroll-margin-top: 4rem;
+}
+
+.md-typeset h2 {
+  border-bottom: 1px solid var(--ef-red-subtle);
+  padding-bottom: 0.3em;
+}
+
+/* Admonition accent tweaks */
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-color: var(--ef-red);
+}
+
+/* Table styling */
+.md-typeset table:not([class]) {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--ef-red);
+  color: white;
+}
+
+/* ============================================
+   Footer Enhancement
+   ============================================ */
+
+.md-footer {
+  border-top: 2px solid var(--ef-red);
+}
+
+/* ============================================
+   Announcement Bar
+   ============================================ */
+
+.md-banner {
+  background: linear-gradient(90deg, var(--ef-red-dark), var(--ef-red));
+  color: white;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.md-banner a {
+  color: white;
+  text-decoration: underline;
+}
+
+/* ============================================
+   Page load animation
+   ============================================ */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.md-content {
+  animation: fadeIn 0.4s ease;
+}
+
+/* ============================================
+   Scrollbar (Webkit)
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ef-red);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ef-red-light);
+}
+
+/* ============================================
+   Progress bar color
+   ============================================ */
+
+.md-progress {
+  background: var(--ef-red);
+}

@@ -1,5 +1,7 @@
 ---
 title: Anleitungen
+tags:
+  - Neu
 ---
 
 # Anleitungen

@@ -1,50 +1,69 @@
 site_name: EmergencyForge Wiki
 site_description: Das Wiki fuer EmergencyForge — Dokumentation, Anleitungen und Wissenssammlung
 site_url: https://wiki.emergencyforge.de/
-repo_url: https://github.com/hypax/Wiki
-repo_name: hypax/Wiki
+repo_url: https://github.com/EmergencyForge/Wiki
+repo_name: EmergencyForge/Wiki
 edit_uri: edit/main/docs/
 
 theme:
   name: material
   language: de
+  custom_dir: docs/overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: deep orange
-      accent: orange
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: Dunkles Design aktivieren
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: deep orange
-      accent: orange
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Helles Design aktivieren
   features:
     - navigation.instant
+    - navigation.instant.progress
     - navigation.tracking
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     - navigation.expand
     - navigation.top
+    - navigation.path
+    - navigation.indexes
     - search.suggest
     - search.highlight
+    - search.share
     - content.action.edit
     - content.code.copy
+    - content.tooltips
     - toc.follow
+    - announce.dismiss
   logo: assets/logo.png
   favicon: assets/logo.png
   icon:
     repo: fontawesome/brands/github
     edit: material/pencil
+    tag:
+      neu: material/new-box
+      wip: material/progress-wrench
+      fertig: material/check-circle
 
 plugins:
   - search:
       lang: de
-  - tags
+  - tags:
+      tags_file: tags.md
+  - social
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+      locale: de
+      fallback_to_build_date: true
 
 markdown_extensions:
   - admonition
@@ -57,29 +76,53 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.keys
+  - pymdownx.mark
   - attr_list
   - md_in_html
+  - def_list
   - tables
+  - footnotes
+  - abbr
   - toc:
       permalink: true
 
 extra:
+  tags:
+    Neu: neu
+    In Arbeit: wip
+    Fertig: fertig
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/hypax/Wiki
+      link: https://github.com/EmergencyForge
+      name: EmergencyForge auf GitHub
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/emergencyforge
+      name: Discord
+  generator: false
+  analytics:
+    provider: custom
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+copyright: Copyright &copy; 2024-2026 EmergencyForge
 
 nav:
   - Startseite: index.md
   - Erste Schritte:
-      - Uebersicht: getting-started/index.md
+      - getting-started/index.md
       - Installation: getting-started/installation.md
       - Konfiguration: getting-started/konfiguration.md
   - Dokumentation:
-      - Uebersicht: dokumentation/index.md
+      - dokumentation/index.md
       - Architektur: dokumentation/architektur.md
       - API: dokumentation/api.md
   - Anleitungen:
-      - Uebersicht: anleitungen/index.md
+      - anleitungen/index.md
   - Mitmachen:
-      - Wie kann ich beitragen?: mitmachen/beitragen.md
+      - mitmachen/beitragen.md
       - Wiki bearbeiten: mitmachen/wiki-bearbeiten.md
+  - Tags: tags.md

@@ -1,5 +1,7 @@
 ---
 title: Wiki bearbeiten
+tags:
+  - Fertig
 ---
 
 # Wiki bearbeiten
@@ -20,7 +22,7 @@ Falls du groessere Aenderungen machen moechtest:
 
 ```bash
 # Repository klonen
-git clone https://github.com/hypax/Wiki.git
+git clone https://github.com/EmergencyForge/Wiki.git
 cd Wiki
 
 # Python-Abhaengigkeiten installieren
@@ -35,11 +37,13 @@ Das Wiki ist dann unter `http://localhost:8000` erreichbar und aktualisiert sich
 ## Neue Seite anlegen
 
 1. Erstelle eine neue `.md`-Datei im passenden Unterordner von `docs/`
-2. Fuege am Anfang der Datei einen Titel hinzu:
+2. Fuege am Anfang der Datei einen Titel und Tags hinzu:
 
     ```markdown
     ---
     title: Mein neuer Artikel
+    tags:
+      - Neu
     ---
 
     # Mein neuer Artikel
@@ -48,6 +52,17 @@ Das Wiki ist dann unter `http://localhost:8000` erreichbar und aktualisiert sich
     ```
 
 3. Trage die Seite in der `mkdocs.yml` unter `nav:` ein
+
+## Status-Tags
+
+Jede Seite kann mit Status-Tags versehen werden:
+
+| Tag | Bedeutung |
+|-----|-----------|
+| <span class="status status-neu">Neu</span> | Seite wurde neu angelegt |
+| <span class="status status-wip">In Arbeit</span> | Inhalte werden gerade erstellt |
+| <span class="status status-fertig">Fertig</span> | Seite ist vollstaendig |
+| <span class="status status-veraltet">Veraltet</span> | Inhalte muessen aktualisiert werden |
 
 ## Nuetzliche Formatierung
 
