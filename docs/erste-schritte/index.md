@@ -9,7 +9,7 @@ Hier findest du alles, um mit intraRP loszulegen.
 ## Systemanforderungen
 
 !!! warning "Achtung"
-Windows wird von uns aktuell nicht offiziell für die Installation bzw. Nutzung von intraRP unterstützt. Wann und ob eine Unterstützung stattfindet ist unklar.
+    Windows wird von uns aktuell nicht offiziell für die Installation bzw. Nutzung von intraRP unterstützt. Wann und ob eine Unterstützung stattfindet ist unklar.
 
 um intraRP erfolgreich betrieben zu können, müssen folgende Anforderungen erfüllt sein:
 
@@ -20,7 +20,7 @@ um intraRP erfolgreich betrieben zu können, müssen folgende Anforderungen erf�
 - MySQL Version 8.0+ oder MariaDB 10.6+
 
 !!! note "Hinweis"
-Composer wird ab Version 0.8.0.0 nicht mehr zwingend vorausgesetzt - die neuste Setup-Installation liefert alle nötigen Dependencies mit. **Für Installationen OHNE das Setup wird weiterhin Composer benötigt!**
+    Composer wird ab Version 0.8.0.0 nicht mehr zwingend vorausgesetzt - die neuste Setup-Installation liefert alle nötigen Dependencies mit. **Für Installationen OHNE das Setup wird weiterhin Composer benötigt!**
 
 ### 2. Speicherplatz
 
