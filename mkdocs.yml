@@ -12,20 +12,9 @@ theme:
     text: Inter
     code: JetBrains Mono
   palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: custom
-      accent: custom
-      toggle:
-        icon: material/brightness-7
-        name: Dunkles Design aktivieren
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: custom
-      accent: custom
-      toggle:
-        icon: material/brightness-4
-        name: Helles Design aktivieren
+    scheme: slate
+    primary: custom
+    accent: custom
   features:
     - navigation.instant
     - navigation.instant.progress

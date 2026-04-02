@@ -6,11 +6,9 @@
 (function () {
   "use strict";
 
-  // Respect reduced motion
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   // ── 3D Tilt Cards ──────────────────────────────
-  // Subtle perspective shift following the cursor
 
   function initTiltCards() {
     var cards = document.querySelectorAll(".grid.cards > ul > li");
@@ -27,7 +25,6 @@
       var rafId = null;
 
       function animate() {
-        // Lerp for smooth spring-like feel
         currentX += (targetX - currentX) * 0.12;
         currentY += (targetY - currentY) * 0.12;
 
@@ -51,19 +48,15 @@
         var rect = card.getBoundingClientRect();
         var x = e.clientX - rect.left;
         var y = e.clientY - rect.top;
-        var centerX = rect.width / 2;
-        var centerY = rect.height / 2;
 
-        // Max 5 degrees — noticeable but not wild
-        targetX = ((y - centerY) / centerY) * -5;
-        targetY = ((x - centerX) / centerX) * 5;
+        targetX = ((y - rect.height / 2) / (rect.height / 2)) * -5;
+        targetY = ((x - rect.width / 2) / (rect.width / 2)) * 5;
       });
 
       card.addEventListener("mouseleave", function () {
         isHovering = false;
         targetX = 0;
         targetY = 0;
-        // Animation loop continues until it reaches 0
         if (!rafId) rafId = requestAnimationFrame(animate);
       });
     });
@@ -86,24 +79,17 @@
     initViewTransitions();
   }
 
+  // Single init — avoid double-firing
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", init, { once: true });
   } else {
     init();
   }
 
   // Re-init on MkDocs Material instant navigation
-  document.addEventListener("DOMContentLoaded", init);
-
-  // Observe for dynamically added cards
-  var observer = new MutationObserver(function (mutations) {
-    for (var i = 0; i < mutations.length; i++) {
-      if (mutations[i].addedNodes.length) {
-        initTiltCards();
-        break;
-      }
-    }
+  var initDebounceTimer = null;
+  document.addEventListener("DOMContentLoaded", function () {
+    clearTimeout(initDebounceTimer);
+    initDebounceTimer = setTimeout(init, 50);
   });
-
-  observer.observe(document.body, { childList: true, subtree: true });
 })();
