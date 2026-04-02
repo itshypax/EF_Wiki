@@ -16,9 +16,36 @@
     var cards = document.querySelectorAll(".grid.cards > ul > li");
 
     cards.forEach(function (card) {
-      // Skip if already initialized
       if (card.dataset.tilt) return;
       card.dataset.tilt = "true";
+
+      var isHovering = false;
+      var currentX = 0;
+      var currentY = 0;
+      var targetX = 0;
+      var targetY = 0;
+      var rafId = null;
+
+      function animate() {
+        // Lerp for smooth spring-like feel
+        currentX += (targetX - currentX) * 0.12;
+        currentY += (targetY - currentY) * 0.12;
+
+        card.style.transform =
+          "perspective(600px) rotateX(" + currentX + "deg) rotateY(" + currentY + "deg) translateY(-4px) scale(1.02)";
+
+        if (isHovering || Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
+          rafId = requestAnimationFrame(animate);
+        } else {
+          card.style.transform = "";
+          rafId = null;
+        }
+      }
+
+      card.addEventListener("mouseenter", function () {
+        isHovering = true;
+        if (!rafId) rafId = requestAnimationFrame(animate);
+      });
 
       card.addEventListener("mousemove", function (e) {
         var rect = card.getBoundingClientRect();
@@ -27,28 +54,25 @@
         var centerX = rect.width / 2;
         var centerY = rect.height / 2;
 
-        // Max 4 degrees rotation — subtle, not nauseating
-        var rotateX = ((y - centerY) / centerY) * -4;
-        var rotateY = ((x - centerX) / centerX) * 4;
-
-        card.style.transform =
-          "perspective(800px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) translateY(-4px)";
+        // Max 5 degrees — noticeable but not wild
+        targetX = ((y - centerY) / centerY) * -5;
+        targetY = ((x - centerX) / centerX) * 5;
       });
 
       card.addEventListener("mouseleave", function () {
-        card.style.transform = "";
+        isHovering = false;
+        targetX = 0;
+        targetY = 0;
+        // Animation loop continues until it reaches 0
+        if (!rafId) rafId = requestAnimationFrame(animate);
       });
     });
   }
 
   // ── View Transitions ───────────────────────────
-  // Hook into MkDocs Material instant navigation
 
   function initViewTransitions() {
     if (!document.startViewTransition) return;
-
-    // MkDocs Material fires 'DOMContentLoaded' on instant nav,
-    // but we can also listen for the content swap
     var content = document.querySelector(".md-content");
     if (content) {
       content.style.viewTransitionName = "content";
@@ -62,7 +86,6 @@
     initViewTransitions();
   }
 
-  // Run on initial load
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
@@ -70,10 +93,9 @@
   }
 
   // Re-init on MkDocs Material instant navigation
-  // The 'instant' feature replaces content without full reload
   document.addEventListener("DOMContentLoaded", init);
 
-  // Also observe for dynamically added cards (search results, etc.)
+  // Observe for dynamically added cards
   var observer = new MutationObserver(function (mutations) {
     for (var i = 0; i < mutations.length; i++) {
       if (mutations[i].addedNodes.length) {

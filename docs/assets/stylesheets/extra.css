@@ -9,7 +9,7 @@
   --ef-red-dark: #8E0000;
   --ef-red-glow: rgba(198, 40, 40, 0.3);
   --ef-red-subtle: rgba(198, 40, 40, 0.08);
-  --ef-border: rgba(198, 40, 40, 0.2);
+  --ef-border: rgba(198, 40, 40, 0.15);
 
   /* MkDocs Material overrides */
   --md-primary-fg-color: var(--ef-red);
@@ -18,83 +18,69 @@
   --md-accent-fg-color: var(--ef-red-light);
 }
 
+/* ── Dark theme: deep black like the reference ── */
 [data-md-color-scheme="slate"] {
+  --md-default-bg-color: #0d1117;
+  --md-default-bg-color--light: #131920;
+  --md-default-bg-color--lighter: #1a2029;
+  --md-default-bg-color--lightest: #222a33;
+  --md-code-bg-color: #161b22;
   --md-primary-fg-color: var(--ef-red);
   --md-primary-fg-color--light: var(--ef-red-light);
   --md-primary-fg-color--dark: var(--ef-red-dark);
   --md-accent-fg-color: var(--ef-red-light);
-  --ef-border: rgba(198, 40, 40, 0.25);
+  --md-typeset-color: rgba(230, 237, 243, 0.85);
+  --ef-border: rgba(255, 255, 255, 0.06);
 }
 
 /* ============================================
-   Ambient Breathing Header
-   Animated gradient that slowly shifts,
-   giving the header a living feel.
+   Header — dark, not red
+   Subtle ambient glow instead of full red.
    ============================================ */
 
-@property --ef-gradient-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
+@property --ef-glow-opacity {
+  syntax: "<number>";
+  initial-value: 0.15;
   inherits: false;
 }
 
-@property --ef-gradient-pos {
-  syntax: "<percentage>";
-  initial-value: 0%;
-  inherits: false;
-}
-
-@keyframes ambientShift {
-  0% {
-    --ef-gradient-angle: 135deg;
-    --ef-gradient-pos: 0%;
-  }
-  25% {
-    --ef-gradient-angle: 180deg;
-    --ef-gradient-pos: 30%;
-  }
-  50% {
-    --ef-gradient-angle: 225deg;
-    --ef-gradient-pos: 60%;
-  }
-  75% {
-    --ef-gradient-angle: 180deg;
-    --ef-gradient-pos: 30%;
-  }
-  100% {
-    --ef-gradient-angle: 135deg;
-    --ef-gradient-pos: 0%;
-  }
+@keyframes ambientGlow {
+  0%, 100% { --ef-glow-opacity: 0.12; }
+  50% { --ef-glow-opacity: 0.25; }
 }
 
 .md-header {
-  background: linear-gradient(
-    var(--ef-gradient-angle),
-    var(--ef-red-dark) var(--ef-gradient-pos),
-    var(--ef-red) calc(var(--ef-gradient-pos) + 40%),
-    var(--ef-red-dark) calc(var(--ef-gradient-pos) + 80%)
-  ) !important;
-  animation: ambientShift 20s ease infinite;
+  background: #0d1117 !important;
+  border-bottom: 1px solid rgba(198, 40, 40, 0.2);
+  box-shadow: 0 1px 20px rgba(198, 40, 40, var(--ef-glow-opacity));
+  animation: ambientGlow 20s ease infinite;
 }
 
-/* Tabs bar picks up the gradient edge */
+/* Tabs bar — dark with subtle red underline */
 .md-tabs {
-  background: linear-gradient(
-    90deg,
-    var(--ef-red-dark),
-    var(--ef-red),
-    var(--ef-red-dark)
-  ) !important;
-  animation: tabShimmer 15s ease infinite;
+  background: #131920 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-@keyframes tabShimmer {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+/* ============================================
+   Sidebar — matches reference style
+   Section labels in red uppercase
+   ============================================ */
+
+/* Section titles (groups) */
+.md-nav__item--nested > .md-nav__link,
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ef-red) !important;
+  opacity: 0.9;
 }
 
-.md-tabs {
-  background-size: 200% 100% !important;
+/* Sidebar background */
+[data-md-color-scheme="slate"] .md-sidebar {
+  background: #0d1117;
 }
 
 /* ============================================
@@ -114,7 +100,7 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background: white;
+  background: var(--ef-red);
   transition: width 0.3s ease, left 0.3s ease;
   border-radius: 2px;
 }
@@ -137,7 +123,7 @@
 
 .md-nav__link:hover {
   padding-left: 0.8rem;
-  background: var(--ef-red-subtle);
+  background: rgba(198, 40, 40, 0.06);
   color: var(--ef-red) !important;
 }
 
@@ -145,13 +131,11 @@
   border-left: 3px solid var(--ef-red);
   padding-left: 0.6rem;
   font-weight: 600;
+  color: var(--ef-red) !important;
 }
 
 /* ============================================
    3D Tilt Cards
-   Cards respond to mouse position with
-   subtle perspective shift. JS adds the
-   inline styles, CSS handles the rest.
    ============================================ */
 
 @keyframes cardSlideUp {
@@ -173,16 +157,16 @@
 .md-typeset .grid.cards > ul > li {
   animation: cardSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   opacity: 0;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
               border-color 0.3s ease;
-  border: 1px solid var(--ef-border);
-  border-top: 3px solid var(--ef-red);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 2px solid var(--ef-red);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
   transform-style: preserve-3d;
   will-change: transform;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .grid.cards > ul > li:nth-child(1) { animation-delay: 0.05s; }
@@ -192,15 +176,14 @@
 .grid.cards > ul > li:nth-child(5) { animation-delay: 0.33s; }
 .grid.cards > ul > li:nth-child(6) { animation-delay: 0.4s; }
 
-/* Card hover: lift + glow + subtle inner shine */
+/* Card hover: glow */
 .grid.cards > ul > li:hover,
 .md-typeset .grid.cards > ul > li:hover {
   box-shadow:
-    0 12px 32px var(--ef-red-glow),
-    0 4px 12px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  border-color: var(--ef-red-light);
-  border-top-color: var(--ef-red-light);
+    0 12px 32px rgba(198, 40, 40, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.08);
+  border-left-color: var(--ef-red-light);
 }
 
 /* Gloss reflection layer on card hover */
@@ -214,7 +197,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.03),
     transparent
   );
   transition: left 0.6s ease;
@@ -228,8 +211,6 @@
 
 /* ============================================
    Scroll-Driven Reveal
-   Sections fade and slide up as they
-   enter the viewport.
    ============================================ */
 
 @supports (animation-timeline: view()) {
@@ -255,7 +236,6 @@
   }
 }
 
-/* Fallback for browsers without scroll-driven animations */
 @supports not (animation-timeline: view()) {
   .md-typeset h2,
   .md-typeset .admonition,
@@ -266,9 +246,7 @@
 }
 
 /* ============================================
-   Page Transition (View Transitions API)
-   Smooth cross-fade + slide on navigation.
-   Triggered by JS when available.
+   View Transitions
    ============================================ */
 
 ::view-transition-old(root) {
@@ -293,7 +271,6 @@
   }
 }
 
-/* Content area gets its own view-transition-name */
 .md-content {
   view-transition-name: content;
 }
@@ -322,12 +299,12 @@
 }
 
 /* ============================================
-   Breadcrumbs Enhancement
+   Breadcrumbs
    ============================================ */
 
 .md-path {
   font-size: 0.75rem;
-  opacity: 0.85;
+  opacity: 0.6;
 }
 
 .md-path__link {
@@ -339,7 +316,7 @@
 }
 
 /* ============================================
-   Content Enhancements
+   Content
    ============================================ */
 
 .md-typeset h1,
@@ -349,7 +326,7 @@
 }
 
 .md-typeset h2 {
-  border-bottom: 1px solid var(--ef-red-subtle);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding-bottom: 0.3em;
 }
 
@@ -360,16 +337,81 @@
 }
 
 .md-typeset table:not([class]) th {
-  background: var(--ef-red);
+  background: var(--ef-red-dark);
   color: white;
 }
 
+/* Code blocks — match reference dark style */
+[data-md-color-scheme="slate"] .md-typeset code {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+[data-md-color-scheme="slate"] .md-typeset pre > code {
+  background: #161b22;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
 /* ============================================
-   Footer Enhancement
+   Footer
    ============================================ */
 
 .md-footer {
-  border-top: 2px solid var(--ef-red);
+  border-top: none;
+  position: relative;
+  background: #0a0e14 !important;
+}
+
+.md-footer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ef-red), transparent);
+}
+
+.md-footer-meta {
+  padding: 1.2rem 0;
+  background: transparent !important;
+}
+
+/* Previous/Next navigation */
+[data-md-color-scheme="slate"] .md-footer__inner {
+  background: #0d1117;
+}
+
+/* Social icons glow on hover */
+.md-social__link svg {
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.md-social__link:hover svg {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 2px 6px var(--ef-red-glow));
+}
+
+.md-copyright {
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.md-copyright:hover {
+  opacity: 1;
+}
+
+/* ============================================
+   Search — dark style
+   ============================================ */
+
+[data-md-color-scheme="slate"] .md-search__form {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-md-color-scheme="slate"] .md-search__form:hover {
+  border-color: rgba(198, 40, 40, 0.3);
 }
 
 /* ============================================
@@ -381,7 +423,6 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Only animate on first load, not on SPA nav */
 .md-content:not([data-navigated]) {
   animation: fadeIn 0.4s ease;
 }
@@ -391,7 +432,7 @@
    ============================================ */
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -399,12 +440,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--ef-red);
-  border-radius: 4px;
+  background: rgba(198, 40, 40, 0.4);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--ef-red-light);
+  background: var(--ef-red);
 }
 
 /* ============================================
@@ -416,7 +457,7 @@
 }
 
 /* ============================================
-   Reduced Motion — respect the user
+   Reduced Motion
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -430,12 +471,7 @@
 
   .md-header {
     animation: none !important;
-    background: var(--ef-red) !important;
-  }
-
-  .md-tabs {
-    animation: none !important;
-    background: var(--ef-red-dark) !important;
+    background: #0d1117 !important;
   }
 
   ::view-transition-old(root),
