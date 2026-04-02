@@ -48,6 +48,6 @@ Falls du einen Fehler beim Login erhältst:
 2. Aktualisiere die `.env`-Datei
 3. Versuche es erneut
 
-## Naechste Schritte
+## Nächste Schritte
 
 1. [Installation](installation.md)
