@@ -1,6 +1,6 @@
 /**
  * EmergencyForge Wiki — Overdrive Effects
- * 3D card tilt + View Transitions integration
+ * 3D card tilt, View Transitions, Scroll Progress
  */
 
 (function () {
@@ -72,14 +72,41 @@
     }
   }
 
+  // ── Scroll Progress Indicator ──────────────────
+  // Shows reading progress on the right TOC sidebar
+
+  function initScrollProgress() {
+    var sidebar = document.querySelector(".md-sidebar--secondary");
+    if (!sidebar) return;
+
+    var ticking = false;
+
+    function updateProgress() {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+      sidebar.style.setProperty("--ef-scroll-progress", progress + "%");
+      ticking = false;
+    }
+
+    window.addEventListener("scroll", function () {
+      if (!ticking) {
+        requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    updateProgress();
+  }
+
   // ── Init ───────────────────────────────────────
 
   function init() {
     initTiltCards();
     initViewTransitions();
+    initScrollProgress();
   }
 
-  // Single init — avoid double-firing
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init, { once: true });
   } else {

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="ef-404">
+  <h1 class="ef-404__code">404</h1>
+  <p class="ef-404__title">Seite nicht gefunden</p>
+  <p class="ef-404__text">Die angeforderte Seite existiert nicht oder wurde verschoben.</p>
+  <div class="ef-404__actions">
+    <a href="{{ config.site_url }}" class="md-button md-button--primary">
+      Zur Startseite
+    </a>
+    <a href="{{ config.site_url }}mitmachen/beitragen/" class="md-button">
+      Fehler melden
+    </a>
+  </div>
+</div>
+{% endblock %}

@@ -4,20 +4,20 @@ title: Installation von intraRP
 
 # Installation von intraRP
 
-Du willst intraRP auch für dein Projekt verwenden? Mit dieser ANleitung findest du heruas, welche Schritte dich zu einer anwendbaren Version von intraRP bringen.
+Du willst intraRP auch für dein Projekt verwenden? Mit dieser Anleitung findest du heraus, welche Schritte dich zu einer anwendbaren Version von intraRP bringen.
 
-!!! tip "Tipp"
-    Die gesamte Installation kann auch mittels einer fertigen Setup-Datei übersprungen bzw. einfach und intuitiv durchgeführt werden. Die Setup-Datei kann unter folgende Link heruntergeladen/aufgerufen werden: [EmergencyForge/intraRP-Setup](https://github.com/EmergencyForge/intraRP-Setup)
+!!! tip "Setup-Tool verwenden"
+    Die gesamte Installation kann auch mittels einer fertigen Setup-Datei einfach und intuitiv durchgeführt werden: [EmergencyForge/intraRP-Setup](https://github.com/EmergencyForge/intraRP-Setup)
 
 ## Voraussetzungen
 
-Stelle sicher, dass alles [Systemanforderungen](index.md#systemanforderungen) erfüllt sind, bevor du mit der Installation beginnst.
+Stelle sicher, dass alle [Systemanforderungen](index.md#systemanforderungen) erfüllt sind, bevor du mit der Installation beginnst.
 
 ## Manuelle Installation
 
 ### 1. Repository klonen
 
-Lade dir die neuste Version von GitHub herunter oder verbinde dich mit deinem Server und navigiere zum gewünschten Installationsverzeichnis:
+Verbinde dich mit deinem Server und navigiere zum gewünschten Installationsverzeichnis:
 
 ```bash
 cd /var/www/
@@ -37,29 +37,34 @@ nano .env
 Trage folgende Informationen ein:
 
 - Datenbankverbindung (Host, Name, Benutzer, Passwort)
-- Discord OAuth Credentials (Client ID, Client Secret)
+- Discord OAuth Credentials (Client ID, Client Secret) — siehe [Discord-Applikation erstellen](discord-app-erstellen.md)
 
 ### 3. Datenbank einrichten
 
-Erstelle eine neue Datenbank und importiere die SQL-Struktur:
+Erstelle eine neue Datenbank und einen Benutzer:
 
-```bash
-mysql -u root -p
-```
+=== ":material-database: MySQL"
 
-In der MYSQL-Konsole:
+    ```sql
+    CREATE DATABASE intrarp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+    CREATE USER 'intrarp'@'localhost' IDENTIFIED BY 'sicheres-passwort';
+    GRANT ALL PRIVILEGES ON intrarp.* TO 'intrarp'@'localhost';
+    FLUSH PRIVILEGES;
+    ```
 
-```sql
-CREATE DATABASE intrarp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'intrarp'@'localhost' IDENTIFIED BY 'sicheres-passwort';
-GRANT ALL PRIVILEGES ON intrarp.* TO 'intrarp'@'localhost';
-FLUSH PRIVILEGES;
-EXIT;
-```
+=== ":material-database-outline: MariaDB"
+
+    ```sql
+    CREATE DATABASE intrarp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+    CREATE USER 'intrarp'@'localhost' IDENTIFIED BY 'sicheres-passwort';
+    GRANT ALL PRIVILEGES ON intrarp.* TO 'intrarp'@'localhost';
+    FLUSH PRIVILEGES;
+    ```
+
+!!! danger "Sicherheit"
+    Verwende ein starkes Passwort und **nicht** den Platzhalter `sicheres-passwort`.
 
 ### 4. Abhängigkeiten installieren
-
-Installiere alle benötigten PHP-Abhängigkeiten mit Composer:
 
 ```bash
 composer install --no-dev
@@ -67,21 +72,25 @@ composer install --no-dev
 
 ### 5. Installation abschließen
 
-Rufe deine Installation im Browser auf.
+Rufe deine Installation im Browser auf und folge den Anweisungen.
 
 ## Fehlerbehebung
 
-### "500 Internal Server Error"
+??? failure "500 Internal Server Error"
+    **Mögliche Ursachen:**
 
-**Mögliche Fehler:**
+    - Falsche Dateiberechtigungen
+    - Fehler in der `.env`-Datei
+    - PHP-Erweiterungen fehlen
+    - Composer wurde nicht oder nicht korrekt ausgeführt
 
-- Falsche Dateiberechtigungen
-- Fehler in der `.env`-Datei
-- PHP-Erweiterungen fehlen
-- Composer wurde nicht oder nicht korrekt ausgeführt
+    **Lösung:** Prüfe die Server-Logs unter `/var/log/apache2/error.log` oder `/var/log/nginx/error.log`.
 
-### "Database connection failed"
+??? failure "Database connection failed"
+    1. Prüfe deine Datenbankverbindung in der `.env`
+    2. Stelle sicher, dass MySQL/MariaDB läuft: `systemctl status mysql`
+    3. Teste die Verbindung manuell: `mysql -u intrarp -p intrarp`
 
-1. Prüfe deine Datenbankverbindung in der `.env`
-2. Stelle sicher, dass Mysql läuft
-3. Teste die Verbindung ggf. manuell
+## Nächste Schritte
+
+Nach erfolgreicher Installation kannst du dich über Discord einloggen und mit der Konfiguration beginnen.

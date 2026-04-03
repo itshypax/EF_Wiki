@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {{ super() }}
+
+  {# Related Pages — rendered at bottom of every article page #}
+  {% if page and page.meta and page.meta.related %}
+  <div class="ef-related">
+    <h3 class="ef-related__title">Verwandte Seiten</h3>
+    <div class="ef-related__links">
+      {% for item in page.meta.related %}
+        <a href="{{ item.link }}" class="ef-related__link">
+          <span class="ef-related__icon">{{ item.icon | default("📄") }}</span>
+          <span>{{ item.title }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}

@@ -489,6 +489,279 @@
 }
 
 /* ============================================
+   HERO SECTION — Landing page
+   ============================================ */
+
+.ef-hero {
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+  margin: -0.6rem -0.6rem 0;
+  border-bottom: 1px solid var(--ef-border-red);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(198, 40, 40, 0.06) 0%, transparent 60%),
+    var(--ef-surface-1);
+}
+
+.ef-hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 0.5em;
+}
+
+.ef-hero__subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.6;
+  display: block;
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.ef-hero__actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ef-hero .md-button {
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+}
+
+.ef-hero .md-button--primary {
+  background: var(--ef-red);
+  border-color: var(--ef-red);
+  color: white;
+  box-shadow: 0 4px 16px rgba(198, 40, 40, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ef-hero .md-button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(198, 40, 40, 0.35);
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ef-hero {
+  animation: heroFadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================
+   QUICK-LINK CHIPS
+   ============================================ */
+
+.ef-quicklinks {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 1.2rem 0;
+  margin: 0 -0.6rem;
+  border-bottom: 1px solid var(--ef-border-subtle);
+  background: var(--ef-surface-0);
+}
+
+.ef-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.4em 1em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(220, 228, 236, 0.8);
+  background: var(--ef-surface-2);
+  border: 1px solid var(--ef-border-medium);
+  border-radius: 20px;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  text-decoration: none;
+}
+
+.ef-chip:hover {
+  border-color: var(--ef-red);
+  color: var(--ef-red-light);
+  background: rgba(198, 40, 40, 0.08);
+}
+
+/* ============================================
+   REQUIREMENTS SECTION
+   ============================================ */
+
+.ef-requirements {
+  margin-top: 1rem;
+}
+
+/* ============================================
+   INLINE BADGES
+   ============================================ */
+
+.ef-badge {
+  display: inline-block;
+  padding: 0.15em 0.55em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-left: 0.3em;
+}
+
+.ef-badge--required {
+  background: rgba(198, 40, 40, 0.15);
+  color: var(--ef-red-light);
+  border: 1px solid rgba(198, 40, 40, 0.25);
+}
+
+.ef-badge--optional {
+  background: rgba(33, 150, 243, 0.12);
+  color: #64B5F6;
+  border: 1px solid rgba(33, 150, 243, 0.2);
+}
+
+.ef-badge--new {
+  background: rgba(76, 175, 80, 0.12);
+  color: #81C784;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.ef-badge--deprecated {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ef-badge--version {
+  background: rgba(198, 40, 40, 0.1);
+  color: var(--ef-red-light);
+  border: 1px solid var(--ef-border-red);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ============================================
+   RELATED PAGES
+   ============================================ */
+
+.ef-related {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ef-border-subtle);
+}
+
+.ef-related__title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ef-red-light);
+  margin-bottom: 0.8rem;
+}
+
+.ef-related__links {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.ef-related__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.5em 1em;
+  font-size: 0.8rem;
+  background: var(--ef-surface-2);
+  border: 1px solid var(--ef-border-subtle);
+  border-radius: 6px;
+  color: var(--md-typeset-color);
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ef-related__link:hover {
+  border-color: var(--ef-red);
+  background: rgba(198, 40, 40, 0.06);
+}
+
+/* ============================================
+   404 PAGE
+   ============================================ */
+
+.ef-404 {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.ef-404__code {
+  font-size: 6rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--ef-red);
+  opacity: 0.3;
+  margin-bottom: 0.2em;
+}
+
+.ef-404__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+.ef-404__text {
+  opacity: 0.6;
+  margin-bottom: 2em;
+}
+
+.ef-404__actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   SCROLL PROGRESS on TOC
+   ============================================ */
+
+.md-sidebar--secondary {
+  position: relative;
+}
+
+.md-sidebar--secondary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: var(--ef-scroll-progress, 0%);
+  background: var(--ef-red);
+  transition: height 0.15s ease-out;
+  border-radius: 1px;
+  opacity: 0.6;
+}
+
+/* ============================================
+   HIDE NAV/TOC on landing page
+   ============================================ */
+
+.md-content[data-md-component="content"] > article > .ef-hero ~ .md-typeset {
+  max-width: 100%;
+}
+
+/* ============================================
    REDUCED MOTION
    ============================================ */
 
@@ -504,6 +777,10 @@
   .md-header {
     animation: none !important;
     background: var(--ef-surface-0) !important;
+  }
+
+  .ef-hero {
+    animation: none !important;
   }
 
   ::view-transition-old(root),

@@ -8,6 +8,7 @@ edit_uri: edit/main/docs/
 theme:
   name: material
   language: de
+  custom_dir: docs/overrides
   font:
     text: Inter
     code: JetBrains Mono
