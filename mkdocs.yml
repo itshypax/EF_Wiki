@@ -91,7 +91,7 @@ extra_css:
 extra_javascript:
   - assets/javascripts/overdrive.js
 
-copyright: "&copy; 2024-2026 EmergencyForge"
+copyright: "&copy; 2024-2026 EmergencyForge &nbsp;·&nbsp; <a href='https://wiki.emergencyforge.de/mitmachen/beitragen/'>Mitmachen</a>"
 
 nav:
   - Startseite: index.md
@@ -99,7 +99,3 @@ nav:
       - erste-schritte/index.md
       - Discord einrichten: erste-schritte/discord-app-erstellen.md
       - Installation: erste-schritte/installation.md
-  - Mitmachen:
-      - mitmachen/beitragen.md
-      - Wiki bearbeiten: mitmachen/wiki-bearbeiten.md
-      - Styleguide: mitmachen/styleguide.md
