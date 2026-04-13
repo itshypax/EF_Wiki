@@ -99,3 +99,10 @@ nav:
       - erste-schritte/index.md
       - Discord einrichten: erste-schritte/discord-app-erstellen.md
       - Installation: erste-schritte/installation.md
+  - Dokumentation:
+      - dokumentation/index.md
+      - Architektur: dokumentation/architektur.md
+      - API-Referenz: dokumentation/api.md
+      - Telemetrie & Support: dokumentation/telemetrie-support.md
+      - Fehlerprotokoll: dokumentation/fehlerprotokoll.md
+      - Cron & Hintergrund-Jobs: dokumentation/cron-setup.md
